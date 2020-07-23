@@ -1,0 +1,48 @@
+body {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    background: #FFFFFF;
+
+
+}
+
+body::after {
+    content: "";
+    background-image: url("chatbotGZ.png");
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    top: 40%;
+    left: 25%;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    /*z-index: -1;*/
+}
+
+span {
+    color: black;
+}
+
+::-webkit-input-placeholder {
+    color: black;
+}
+
+#main {
+    position: fixed;
+    top: 40%;
+    right: 200px;
+    width: 400px;
+    border: 0px solid black;
+    padding: 40px;
+}
+
+#main div {
+    margin: 10px;
+}
+
+#input {
+    border: 0;
+    padding: 5px;
+    border: 1px solid black;
+}
