@@ -15,7 +15,7 @@ function closeChatbot () {
 document.getElementById("GZ").style.display = "none";
 }
 
-
+//Chatbot
 botui.message.add({
     content: 'Salut, je suis le bot de Génération Zhéros',
 });
