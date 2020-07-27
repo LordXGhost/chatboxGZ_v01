@@ -1,57 +1,89 @@
 var botui = new BotUI('GZ');
+let toggle = document.getElementById("toggle");
+let chatbotGZ = document.getElementById("GZ");
+
+//Ajout bouton pour afficher/masquer le chatbot
+toggle.addEventListener("click", () => {
+    if(getComputedStyle(chatbotGZ).display !== "none"){
+        chatbotGZ.style.display = "none";
+    } else {
+        chatbotGZ.style.display = "block";
+    }
+});
+
+function closeChatbot () {
+document.getElementById("GZ").style.display = "none";
+}
+
 
 botui.message.add({
-    content: 'Hello, je suis le bot GZ',
+    content: 'Salut, je suis le bot de Génération Zhéros',
 });
 botui.message.add({
     loading: true,
     delay: 1000,
-    content: "Je peux te donner plus d'informations concernant Génération Zhéros, il te suffit de cliquer pour discuter avec moi"
+    content: "Je peux te donner plus d'informations concernant Génération Zhéros, il te suffit de cliquer sur le thème de ton choix pour discuter avec moi"
 }).then(() => botui.action.button({
     delay: 1000,
     action: [
         {
-            id: 1,
-            text: "GZ c'est quoi ?",
-            value: "Go1"
-        }]
-})).then(() => botui.message.add({
+            text: "Génération Zhéros c'est quoi ?",
+            value: "what"
+        },
+        {
+            text: "Comment ca fonctionne ?",
+            value: "how"
+        },
+    ]
+})).then(function (res) {
+    if (res.value === "what") {
+        botui.message.add({
+            loading: true,
+            delay: 1000,
+            content: 'GZ est une application sur le développement durable'
+        })
+    } else {
+        botui.message.add({
+            loading: true,
+            delay: 1000,
+            content: "C'est une application simple a utiliser, il te suffit de t'inscrire"
+        })
+    }
+}).then(() => botui.action.button({
+    delay: 1000,
+    action: [
+        {
+            text: "En savoir plus sur son fonctionnement ?",
+            value: "how"
+        },
+        {
+            text: "Ou trouver l'application ?",
+            value: "where"
+        }
+    ]
+})).then(function (res) {
+    if (res.value === "how") {
+        botui.message.add({
+            loading: true,
+            delay: 1000,
+            content: "Ce bouton donne plus de détails sur le fonctionnement de l'application"
+        })
+    } else {
+        botui.message.add({
+            loading: true,
+            delay: 1000,
+            content: "Sur les stores Android et Ios!"
+        })
+    }
+}).then(() => botui.message.add({
     loading: true,
     delay: 1000,
-    content: 'GZ est une application sur le développement durable'
-}))
-    .then(() => botui.action.button({
-        delay: 1000,
-        action: [
-            {
-                id: 2,
-                text: "Comment ca fonctionne ?",
-                value: "Go2"
-            }
-        ]
-    })).then(() => botui.message.add({
-    loading: true,
-    delay: 1000,
-    content: "C'est une application simple a utiliser, il te suffit de t'inscrire"
-}))
-    .then(() => botui.action.button({
-        delay: 1000,
-        action: [
-            {
-                id: 3,
-                text: "Ou trouver l'application ?",
-                value: "Go3"
-            }
-        ]
-    })).then(() => botui.message.add({
-    loading: true,
-    delay: 1000,
-    content: 'Sur les stores Android et Ios!'
+    content: "Si tu souhaites continuer a me parler, je vais te poser quelques questions sur tes habitudes :)"
 }))
     .then(() => botui.message.add({
         loading: true,
         delay: 1000,
-        content: "Etes-vous flexitarien ou végétarien ?"
+        content: "Es-tu flexitarien ou végétarien ?"
     }))
     .then(() => botui.action.button({
         delay: 1000,
@@ -78,7 +110,7 @@ botui.message.add({
             loading: true,
             delay: 1000,
             content: "Bravo, c'est une belle étape vers le développement durable",
-            value: "végétarien"
+            value: "vegetarian"
         })
     }
 }).then(function (res) {
