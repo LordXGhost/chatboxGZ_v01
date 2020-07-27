@@ -13,11 +13,11 @@ function output(input) {
     let product;
     let text = input.toLowerCase().replace(/[^\w\s\d]/gi, "");
     text = text
-        .replace(/ un /g, " ")
-        .replace(/ca va /g, "")
-        .replace(/C'est /g, "est")
-        .replace(/m'inscrire /g, "inscrire")
-        .replace(/ merci/g, "");
+        // .replace(/ m'inscrire/g, "");
+        // .replace(/comment ca va /g, "")
+        // .replace(/cest quoi GZ/g, "")
+        // .replace(/fonctionne/g, "")
+        // .replace(/ merci/g, "");
 
 //compare arrays
 //then search keyword
@@ -76,15 +76,15 @@ const trigger = [
 //0
     ["bonjour", "salut", "hello"],
 //1
-    ["Comment ca va?", ""],
+    ["ca va"],
 //2
-    ["C'est quoi GZ?", "Comment ca fonctionne?"],
+    ["quoi", "fonctionne"],
 //3
-    ["Cool"],
+    ["cool"],
 //4
-    ["Qu'est que ca apporte?", "Pourquoi ?"],
+    ["apporte", "pourquoi"],
 //5
-    ["Ou puis-je m'inscrire"],
+    ["inscrire"],
 //6
     ["Merci"],
 //7
@@ -104,7 +104,7 @@ const reply = [
         "C'est une application simple a utiliser, il te suffit de t'inscrire"
     ],
 //3
-    ["Glad to hear it"],
+    ["Content de l'apprendre"],
 //4
     ["Devenir un Zhéros!", "Tu pourras améliorer ton impact environnemental"],
 //5
