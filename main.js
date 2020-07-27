@@ -1,121 +1,104 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const inputField = document.getElementById("input");
-    inputField.addEventListener("keydown", function (e) {
-        if (e.code === "Enter") {
-            let input = inputField.value;
-            inputField.value = "";
-            output(input);
-        }
-    });
+var botui = new BotUI('GZ');
+
+botui.message.add({
+    content: 'Hello, je suis le bot GZ',
 });
-
-function output(input) {
-    let product;
-    let text = input.toLowerCase().replace(/[^\w\s\d]/gi, "");
-    text = text
-        // .replace(/ m'inscrire/g, "");
-        // .replace(/comment ca va /g, "")
-        // .replace(/cest quoi GZ/g, "")
-        // .replace(/fonctionne/g, "")
-        // .replace(/ merci/g, "");
-
-//compare arrays
-//then search keyword
-//then random alternative
-
-    if (compare(trigger, reply, text)) {
-        product = compare(trigger, reply, text);
-        // } else if (text.match(/robot/gi)) {
-        //     product = robot[Math.floor(Math.random() * robot.length)];
-    } else {
-        product = alternative[Math.floor(Math.random() * alternative.length)];
-    }
-
-    //update DOM
-    addChat(input, product);
-
-    document.getElementById("chatbot").innerHTML = product;
-    speak(product);
-
-    //clear input value
-    document.getElementById("input").value = "";
-}
-
-function compare(triggerArray, replyArray, string) {
-    let item;
-    for (let x = 0; x < triggerArray.length; x++) {
-        for (let y = 0; y < replyArray.length; y++) {
-            if (triggerArray[x][y] === string) {
-                items = replyArray[x];
-                item = items[Math.floor(Math.random() * items.length)];
+botui.message.add({
+    loading: true,
+    delay: 1000,
+    content: "Je peux te donner plus d'informations concernant Génération Zhéros, il te suffit de cliquer pour discuter avec moi"
+}).then(() => botui.action.button({
+    delay: 1000,
+    action: [
+        {
+            id: 1,
+            text: "GZ c'est quoi ?",
+            value: "Go1"
+        }]
+})).then(() => botui.message.add({
+    loading: true,
+    delay: 1000,
+    content: 'GZ est une application sur le développement durable'
+}))
+    .then(() => botui.action.button({
+        delay: 1000,
+        action: [
+            {
+                id: 2,
+                text: "Comment ca fonctionne ?",
+                value: "Go2"
             }
-        }
+        ]
+    })).then(() => botui.message.add({
+    loading: true,
+    delay: 1000,
+    content: "C'est une application simple a utiliser, il te suffit de t'inscrire"
+}))
+    .then(() => botui.action.button({
+        delay: 1000,
+        action: [
+            {
+                id: 3,
+                text: "Ou trouver l'application ?",
+                value: "Go3"
+            }
+        ]
+    })).then(() => botui.message.add({
+    loading: true,
+    delay: 1000,
+    content: 'Sur les stores Android et Ios!'
+}))
+    .then(() => botui.message.add({
+        loading: true,
+        delay: 1000,
+        content: "Etes-vous flexitarien ou végétarien ?"
+    }))
+    .then(() => botui.action.button({
+        delay: 1000,
+        action: [
+            {
+                text: "Je suis flexitarien",
+                value: "choice1"
+            },
+            {
+                text: "Je suis végétarien",
+                value: "choice2"
+            },
+        ]
+    })).then(function (res) {
+    if (res.value === "choice1") {
+        botui.message.bot({
+            loading: true,
+            delay: 1000,
+            content: `Vous etes flexitarien, combien de fois par semaine mangez-vous de la viande ?`,
+            value: "flexitarien"
+        })
+    } else {
+        botui.message.bot({
+            loading: true,
+            delay: 1000,
+            content: "Bravo, c'est une belle étape vers le développement durable",
+            value: "végétarien"
+        })
     }
-    return item;
-}
-
-function addChat(input, product) {
-    const mainDiv = document.getElementById("main");
-    let userDiv = document.createElement("div");
-    userDiv.id = "user";
-    userDiv.innerHTML = `You: <span id="user-response">${input}</span>`;
-    mainDiv.appendChild(userDiv);
-
-    let botDiv = document.createElement("div");
-    botDiv.id = "bot";
-    botDiv.innerHTML = `Chatbot Génération Zhéros: <span id="bot-response">${product}</span>`;
-    mainDiv.appendChild(botDiv);
-    speak(product);
-}
-
-function speak(string) {
-
-}
-
-const trigger = [
-//0
-    ["bonjour", "salut", "hello"],
-//1
-    ["ca va"],
-//2
-    ["quoi", "fonctionne"],
-//3
-    ["cool"],
-//4
-    ["apporte", "pourquoi"],
-//5
-    ["inscrire"],
-//6
-    ["Merci"],
-//7
-    ["Au revoir", "ciao"]
-];
-
-const reply = [
-//0
-    ["Hello!", "Bonjour!", "Hey!", "Salut!"],
-//1
-    [
-        "Je vais bien... merci",
-    ],
-//2
-    [
-        "GZ est une application sur le développement durable",
-        "C'est une application simple a utiliser, il te suffit de t'inscrire"
-    ],
-//3
-    ["Content de l'apprendre"],
-//4
-    ["Devenir un Zhéros!", "Tu pourras améliorer ton impact environnemental"],
-//5
-    ["Sur les stores Android et Ios!"],
-//6
-    ["De rien", "Pas de probleme"],
-//7
-    ["Au revoir", "A bientot"],
-];
-
-const alternative = [
-    "Je n'ai pas compris",
-    "J'écoute...",
-];
+}).then(function (res) {
+    if (res.value === "flexitarien") {
+        botui.action.button({
+            delay: 1000,
+            action: [
+                {
+                    text: "2 / semaine",
+                    value: "2"
+                },
+                {
+                    text: "1 / semaine",
+                    value: "1"
+                },
+            ]
+        }).then(() => botui.message.add({
+            loading: true,
+            delay: 1000,
+            content: `Ok vous mangez de la viande ${res.text}!`
+        }))
+    }
+});
