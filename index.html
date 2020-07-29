@@ -14,11 +14,15 @@
 
 </head>
 <body>
+
 <button id="toggle" class="btn"></button>
 
-<div class="botui-app-container" id="GZ">
+<div class="botui-app-container" id="GZ" style="display: none">
+    <div class="row chat-header">
+        <h1 class="title">Une question ? discutez avec le bot GZ</h1>
+        <i class="fa fa-times" onclick="closeChatbot()"></i>
+    </div>
     <bot-ui></bot-ui>
-    <button onclick="closeChatbot()">Au revoir!</button>
 </div>
 
 

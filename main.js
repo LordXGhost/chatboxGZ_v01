@@ -135,24 +135,3 @@ botui.message.add({
         })
     }
 });
-// }).then(function (res) {
-//     if (res.value === "flexitarien") {
-//         botui.action.button({
-//             delay: 1000,
-//             action: [
-//                 {
-//                     text: "2 / semaine",
-//                     value: "2"
-//                 },
-//                 {
-//                     text: "1 / semaine",
-//                     value: "1"
-//                 },
-//             ]
-//         }).then(() => botui.message.add({
-//             loading: true,
-//             delay: 1000,
-//             content: `Ok vous mangez de la viande ${res.text}!`
-//         }))
-//     }
-
