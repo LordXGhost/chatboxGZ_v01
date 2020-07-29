@@ -4,15 +4,15 @@ let chatbotGZ = document.getElementById("GZ");
 
 //Ajout bouton pour afficher/masquer le chatbot
 toggle.addEventListener("click", () => {
-    if(getComputedStyle(chatbotGZ).display !== "none"){
+    if (getComputedStyle(chatbotGZ).display !== "none") {
         chatbotGZ.style.display = "none";
     } else {
         chatbotGZ.style.display = "block";
     }
 });
 
-function closeChatbot () {
-document.getElementById("GZ").style.display = "none";
+function closeChatbot() {
+    document.getElementById("GZ").style.display = "none";
 }
 
 //Chatbot
@@ -104,7 +104,28 @@ botui.message.add({
             delay: 1000,
             content: `Vous etes flexitarien, combien de fois par semaine mangez-vous de la viande ?`,
             value: "flexitarien"
-        })
+        }).then(function () {
+            console.log(res.value);
+            if (res.value === "choice1") {
+                botui.action.button({
+                    delay: 1000,
+                    action: [
+                        {
+                            text: "2 / semaine",
+                            value: "2"
+                        },
+                        {
+                            text: "1 / semaine",
+                            value: "1"
+                        },
+                    ]
+                }).then(() => botui.message.add({
+                    loading: true,
+                    delay: 1000,
+                    content: `Ok vous mangez de la viande ${res.text}!`
+                }))
+            }
+        });
     } else {
         botui.message.bot({
             loading: true,
@@ -113,24 +134,25 @@ botui.message.add({
             value: "vegetarian"
         })
     }
-}).then(function (res) {
-    if (res.value === "flexitarien") {
-        botui.action.button({
-            delay: 1000,
-            action: [
-                {
-                    text: "2 / semaine",
-                    value: "2"
-                },
-                {
-                    text: "1 / semaine",
-                    value: "1"
-                },
-            ]
-        }).then(() => botui.message.add({
-            loading: true,
-            delay: 1000,
-            content: `Ok vous mangez de la viande ${res.text}!`
-        }))
-    }
 });
+// }).then(function (res) {
+//     if (res.value === "flexitarien") {
+//         botui.action.button({
+//             delay: 1000,
+//             action: [
+//                 {
+//                     text: "2 / semaine",
+//                     value: "2"
+//                 },
+//                 {
+//                     text: "1 / semaine",
+//                     value: "1"
+//                 },
+//             ]
+//         }).then(() => botui.message.add({
+//             loading: true,
+//             delay: 1000,
+//             content: `Ok vous mangez de la viande ${res.text}!`
+//         }))
+//     }
+
