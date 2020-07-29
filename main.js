@@ -2,7 +2,7 @@ var botui = new BotUI('GZ');
 let toggle = document.getElementById("toggle");
 let chatbotGZ = document.getElementById("GZ");
 
-//Ajout bouton pour afficher/masquer le chatbot
+//bouton pour afficher/masquer le chatbot
 toggle.addEventListener("click", () => {
     if (getComputedStyle(chatbotGZ).display !== "none") {
         chatbotGZ.style.display = "none";
@@ -11,11 +11,18 @@ toggle.addEventListener("click", () => {
     }
 });
 
-function closeChatbot() {
-    document.getElementById("GZ").style.display = "none";
+//hide bot when clicked
+function hideBot() {
+    document.getElementById("toggle").style.display = "none";
 }
 
-//Chatbot
+//close chatbot and display bot icon
+function closeChatbot() {
+    document.getElementById("GZ").style.display = "none";
+    document.getElementById("toggle").style.display = "block";
+}
+
+//chatbot
 botui.message.add({
     content: 'Salut, je suis le bot de Génération Zhéros',
 });
