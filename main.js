@@ -31,7 +31,7 @@ botui.message.add({
     delay: 1000,
     content: "Je peux te donner plus d'informations concernant Génération Zhéros, il te suffit de cliquer sur le thème de ton choix pour discuter avec moi"
 }).then(() => botui.action.button({
-    delay: 1000,
+    delay: 500,
     action: [
         {
             text: "Génération Zhéros c'est quoi ?",
@@ -84,7 +84,7 @@ botui.message.add({
     }
 }).then(() => botui.message.add({
     loading: true,
-    delay: 1000,
+    delay: 1500,
     content: "Si tu souhaites continuer a me parler, je vais te poser quelques questions sur tes habitudes :)"
 }))
     .then(() => botui.message.add({
